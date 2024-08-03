@@ -1,0 +1,10 @@
+main {
+	width: 100%;
+	min-height: 10vh;
+	background-color: rgb(68, 93, 93);
+	color: aliceblue;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem;
+}
