@@ -3,33 +3,33 @@ document.createElement('h3');
 document.addEventListener("DOMContentLoaded", () => {
 	const configuration = {
 		identifierAndVersion: "1.0.0",
-		defaultPage: "onViewPage", // <-- Add this line
+		defaultPage: "NewProducts", // <-- Add this line
 		uiSetup: {
 			header: {
 				logoUrl: 'url-to-logo',
 				navigationPages: {
 
-					onViewPage: {
-						pageTitle: 'ON VIEW',
+					NewProducts: {
+						pageTitle: 'New Products',
 						pageContent: [{
 							id: 1,
 							dataTitle: 'Summer collection',
-							description: '₾ 39 \n description',
+							price: '39',
 							imageSource: `${a}1.png`
 						}, {
 							id: 2,
 							dataTitle: 'Limited collection',
-							description: '₾ 39 \n description',
+							price: '39',
 							imageSource: `${a}2.png`
 						}, {
 							id: 3,
 							dataTitle: 'Limited collection',
-							description: '₾ 39 \n description',
+							price: '39',
 							imageSource: `${a}3.png`
 						}, {
 							id: 4,
 							dataTitle: 'data title',
-							description: '₾ 39 \n description',
+							price: '39',
 							imageSource: `${a}4.png`
 						}]
 					},
@@ -43,8 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
 						}
 						]
 					},
-
-
 				}
 			},
 			utilityFunctions: {
@@ -57,13 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
 						link.onclick = () => loadPage(page);
 						navItems.appendChild(link);
 					});
-
-					const languageToggle = document.querySelector("#navigationBar .language-toggle");
-					["EN", "FR", "GE"].forEach(lang => {
-						const span = document.createElement("span");
-						span.innerText = lang;
-						languageToggle.appendChild(span);
-					});
 				},
 				loadPage: function (pageTitle, pageName) {
 					const content = document.getElementById("pageTitle");
@@ -74,25 +65,53 @@ document.addEventListener("DOMContentLoaded", () => {
 					const content = document.getElementById("pageContent");
 					content.innerHTML = '';
 					collections.forEach(item => {
-						const itemDiv = this.createProductItem(item.dataTitle, item.description, item.imageSource);
+						const itemDiv = this.createProductItem(item.dataTitle, item.price, item.imageSource);
 						content.appendChild(itemDiv);
 					});
 				},
-				createProductItem: function (dataTitle, description, imageSource) {
+				createProductItem: function (dataTitle, price, imageSource) {
+					// Create the main item container
 					const itemDiv = document.createElement("div");
 					itemDiv.className = 'item';
-					const itemName = document.createElement("h3");
-					itemName.innerText = dataTitle;
-					const itemDescription = document.createElement("p");
-					itemDescription.innerText = description;
-					const card = document.createElement("div");
+
+					// Create and configure the image container
+					const imgContainer = document.createElement("div");
+					imgContainer.className = 'image-container';
+
+					// Create and configure the image element
 					const itemImage = document.createElement("img");
 					itemImage.src = imageSource;
-					card.appendChild(itemImage);
-					card.className = 'card';
-					itemDiv.appendChild(itemName);
-					itemDiv.appendChild(itemDescription);
-					itemDiv.appendChild(card);
+					itemImage.alt = dataTitle; // Add alt text for accessibility
+
+					// Toggle fullscreen on click
+					itemImage.addEventListener('click', () => {
+						imgContainer.classList.toggle('fullscreen');
+					});
+
+					imgContainer.appendChild(itemImage);
+
+					// Create and configure the overlay
+					const overlay = document.createElement("div");
+					overlay.className = 'overlay';
+
+					// Create and configure the item title
+					const itemName = document.createElement("h3");
+					itemName.innerText = dataTitle;
+
+					// Create and configure the item price
+					const itemPrice = document.createElement("p");
+					const gel = '₾';
+					itemPrice.innerText = `${price} ${gel}`;
+
+					// Append title and price to the overlay
+					overlay.appendChild(itemName);
+					overlay.appendChild(itemPrice);
+
+					// Append the overlay to the image container
+					imgContainer.appendChild(overlay);
+
+					// Append the image container to the main item container
+					itemDiv.appendChild(imgContainer);
 
 					return itemDiv;
 				},
@@ -113,10 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function initializePage(config) {
 		config.uiSetup.utilityFunctions.createNavBar(config.uiSetup.header.navigationPages);
-
-		// load images from assets folder and add it to config.pages
-
-
 		loadPage(config.defaultPage); // <-- Use defaultPage here
 	}
 
@@ -124,3 +139,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+document.getElementById('toggle').addEventListener('change', function () {
+	const body = document.body;
+	const navBar = document.getElementById('navigationBar');
+
+	body.classList.toggle('dark-mode');
+	navBar.classList.toggle('dark-mode');
+});
