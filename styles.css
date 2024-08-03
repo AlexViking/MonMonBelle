@@ -5,6 +5,14 @@
 }
 
 /* Default styles for the elements */
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f0f0f3;
+	color: #333;
+	margin: 0;
+	padding: 0;
+}
+
 #app {
 	font-family: Arial, sans-serif;
 }
@@ -16,12 +24,17 @@
 	align-items: center;
 	padding: var(--default-padding);
 	background-color: #f0f0f0;
-	border: var(--default-border);
 }
 
 .logo {
 	font-size: 1.5em;
 	font-weight: bold;
+}
+
+.nav-items {
+	flex-grow: 1;
+	display: flex;
+	justify-content: center;
 }
 
 .nav-items a {
@@ -30,21 +43,12 @@
 	color: #000;
 }
 
-.language-toggle span {
-	margin: 0 5px;
-	cursor: pointer;
-}
-
 #pageTitle {
 	margin-top: 1rem;
 	display: flex;
 	align-items: center;
 	padding: var(--default-padding);
 	height: 18vh;
-	/* width: var(--default-width); */
-	border: var(--default-border);
-	/* padding: 2rem 0 2rem 0; */
-	/* font-family: monospace; */
 	font-size: xx-large;
 	margin-bottom: 1rem;
 }
@@ -52,55 +56,136 @@
 #pageContent {
 	margin-top: 1rem;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	padding: var(--default-padding);
 	gap: 1rem;
-	height: 60vh;
-	/* width: var(--default-width); */
-	overflow-y: hidden;
-	border: var(--default-border);
-	/* padding: 2rem; */
-	/* margin: auto; */
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	/* background-color: #333; */
-	/* color: white; */
-	/* text-align: center; */
-	/* padding: 1rem; */
-}
-
-.item {
-	height: 90%;
 	width: 90%;
 }
 
-.card {
-	height: 90%;
-	width: 300px;
-	border: var(--default-border);
-	/* background-color: aqua; */
-	/* padding: 1rem; */
-	/* margin: 1rem; */
+/* Default theme (Light) */
+.theme-toggle {
+	display: flex;
+	align-items: center;
 }
 
-.card img {
-	height: 100%;
-	width: 100%;
-	object-fit: cover;
-	display: block;
-	/* Ensures no extra space below the image */
+.theme-toggle input[type="checkbox"] {
+	display: none;
 }
 
-.bottom-fixed {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
+.theme-toggle label {
+	cursor: pointer;
+	padding: 5px 10px;
+	border-radius: 20px;
+	background: #ddd;
+	box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1),
+		inset -3px -3px 6px rgba(255, 255, 255, 0.9);
+	transition: background 0.3s;
+}
+
+.theme-toggle input[type="checkbox"]:checked + label {
+	background: #333;
+	color: #fff;
+}
+
+/* Dark theme styles */
+body.dark-mode {
 	background-color: #333;
-	color: white;
-	text-align: center;
-	padding: 1rem;
+	color: #f0f0f3;
 }
 
-@media (width: 768px) {
+#navigationBar.dark-mode {
+	background: #444;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5),
+		-5px -5px 10px rgba(255, 255, 255, 0.3);
+}
+
+.theme-toggle.dark-mode label {
+	background: #666;
+	color: #fff;
+}
+
+.image-container {
+	border-radius: 12px;
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+
+.image-container img {
+	width: 100%;
+	height: auto;
+	display: block;
+	transform: scale(1.05);
+}
+
+.image-container.fullscreen img {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	object-fit: cover;
+	z-index: 1000;
+}
+
+.overlay {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	padding: 10px;
+	text-align: center;
+}
+
+.overlay h3,
+.overlay p {
+	margin: 0;
+}
+
+.toggle-container {
+	top: 20px;
+	right: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.toggle-checkbox {
+	display: none;
+}
+
+.toggle-label {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	position: relative;
+}
+
+.sun,
+.moon {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+
+.sun {
+	background: yellow;
+	left: 0;
+}
+
+.moon {
+	background: #333;
+	left: 40px;
+}
+
+.toggle-checkbox:checked ~ .toggle-label .sun {
+	left: 40px;
+	background: #333;
+}
+
+.toggle-checkbox:checked ~ .toggle-label .moon {
+	left: 0;
+	background: yellow;
 }
