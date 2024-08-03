@@ -1,10 +1,106 @@
-main {
-	width: 100%;
-	min-height: 10vh;
-	background-color: rgb(68, 93, 93);
-	color: aliceblue;
+:root {
+	--default-width: 400px;
+	--default-padding: 0 20px;
+	--default-border: 1px solid rgb(255, 252, 252);
+}
+
+/* Default styles for the elements */
+#app {
+	font-family: Arial, sans-serif;
+}
+
+#navigationBar {
+	height: 60px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	padding: var(--default-padding);
+	background-color: #f0f0f0;
+	border: var(--default-border);
+}
+
+.logo {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.nav-items a {
+	margin: 0 10px;
+	text-decoration: none;
+	color: #000;
+}
+
+.language-toggle span {
+	margin: 0 5px;
+	cursor: pointer;
+}
+
+#pageTitle {
+	margin-top: 1rem;
+	display: flex;
+	align-items: center;
+	padding: var(--default-padding);
+	height: 18vh;
+	/* width: var(--default-width); */
+	border: var(--default-border);
+	/* padding: 2rem 0 2rem 0; */
+	/* font-family: monospace; */
+	font-size: xx-large;
+	margin-bottom: 1rem;
+}
+
+#pageContent {
+	margin-top: 1rem;
+	display: flex;
+	flex-direction: row;
+	padding: var(--default-padding);
+	gap: 1rem;
+	height: 60vh;
+	/* width: var(--default-width); */
+	overflow-y: hidden;
+	border: var(--default-border);
+	/* padding: 2rem; */
+	/* margin: auto; */
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	/* background-color: #333; */
+	/* color: white; */
+	/* text-align: center; */
+	/* padding: 1rem; */
+}
+
+.item {
+	height: 90%;
+	width: 90%;
+}
+
+.card {
+	height: 90%;
+	width: 300px;
+	border: var(--default-border);
+	/* background-color: aqua; */
+	/* padding: 1rem; */
+	/* margin: 1rem; */
+}
+
+.card img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	display: block;
+	/* Ensures no extra space below the image */
+}
+
+.bottom-fixed {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background-color: #333;
+	color: white;
+	text-align: center;
 	padding: 1rem;
+}
+
+@media (width: 768px) {
 }
